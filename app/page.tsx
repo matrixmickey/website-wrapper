@@ -11,6 +11,12 @@ export default function Home() {
 
   const [selectedAppUrl, setSelectedAppUrl] = useState("https://college-bowl-pool-328214224548.us-east1.run.app");
 
+  function handleIframeLoad(event: React.SyntheticEvent<HTMLIFrameElement>) {
+    if (user) {
+      event.currentTarget.contentWindow?.postMessage({ type: "auth", user }, "*");
+    }
+  }
+
   return (
     <div className="page">
       <div className="header">
@@ -22,7 +28,7 @@ export default function Home() {
         </div>
         {user ? <div className="auth"><Profile /><LogoutButton /></div> : <LoginButton />}
       </div>
-      <iframe className="body" src={selectedAppUrl}></iframe>
+      <iframe className="body" onLoad={handleIframeLoad} src={selectedAppUrl}></iframe>
     </div>
   );
 }
