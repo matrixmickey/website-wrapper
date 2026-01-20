@@ -1,56 +1,28 @@
-import { auth0 } from "@/lib/auth0";
+"use client";
+
 import LoginButton from "@/components/LoginButton";
 import LogoutButton from "@/components/LogoutButton";
 import Profile from "@/components/Profile";
+import { useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0";
 
-export default async function Home() {
-  const session = await auth0.getSession();
-  const user = session?.user;
+export default function Home() {
+  const { user } = useUser();
+
+  const [selectedAppUrl, setSelectedAppUrl] = useState("https://college-bowl-pool-328214224548.us-east1.run.app");
 
   return (
     <div className="page">
       <div className="header">
         <div className="body">
           <div>matrixmickeydotcom</div>
-          <select>
+          <select value={selectedAppUrl} onChange={(e) => setSelectedAppUrl(e.target.value)}>
             <option value="https://college-bowl-pool-328214224548.us-east1.run.app">College Bowl Pool</option>
           </select>
         </div>
         {user ? <div className="auth"><Profile /><LogoutButton /></div> : <LoginButton />}
       </div>
-      <iframe className="body"
-        ></iframe>
-      {/* <div className={"main-card-wrapper" + (user ? " logged-in" : "")}>
-        <img
-          src="https://cdn.auth0.com/quantum-assets/dist/latest/logos/auth0/auth0-lockup-en-ondark.png"
-          alt="Auth0 Logo"
-          className="auth0-logo"
-        />
-        <h1 className="main-title">matrixmickeydotcom</h1>
-        
-        <div className="action-card">
-          {user ? (
-            <div className="logged-in-section">
-              <p className="logged-in-message">✅ Successfully logged in!</p>
-              <Profile />
-              <LogoutButton />
-            </div>
-          ) : (
-            <>
-              <p className="action-text">
-                Welcome! Please log in to access your protected content.
-              </p>
-              <LoginButton />
-            </>
-          )}
-        </div>
-      </div>
-      {user && (
-        <iframe
-          src="https://college-bowl-pool-328214224548.us-east1.run.app"
-          style={{ width: "100%", height: "90vh", border: "none" }}
-        ></iframe>
-      )} */}
+      <iframe className="body" src={selectedAppUrl}></iframe>
     </div>
   );
 }
