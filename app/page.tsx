@@ -8,8 +8,19 @@ export default async function Home() {
   const user = session?.user;
 
   return (
-    <div className="app-container">
-      <div className={"main-card-wrapper" + (user ? " logged-in" : "")}>
+    <div className="page">
+      <div className="header">
+        <div className="body">
+          <div>matrixmickeydotcom</div>
+          <select>
+            <option value="https://college-bowl-pool-328214224548.us-east1.run.app">College Bowl Pool</option>
+          </select>
+        </div>
+        {user ? <div className="auth"><Profile /><LogoutButton /></div> : <LoginButton />}
+      </div>
+      <iframe className="body"
+        ></iframe>
+      {/* <div className={"main-card-wrapper" + (user ? " logged-in" : "")}>
         <img
           src="https://cdn.auth0.com/quantum-assets/dist/latest/logos/auth0/auth0-lockup-en-ondark.png"
           alt="Auth0 Logo"
@@ -39,7 +50,7 @@ export default async function Home() {
           src="https://college-bowl-pool-328214224548.us-east1.run.app"
           style={{ width: "100%", height: "90vh", border: "none" }}
         ></iframe>
-      )}
+      )} */}
     </div>
   );
 }
