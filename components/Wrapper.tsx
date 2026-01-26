@@ -1,27 +1,9 @@
 "use client";
 
-import { useUser } from "@auth0/nextjs-auth0";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function Wrapper({authorization}: {authorization: React.ReactNode}) {
+export default function Wrapper({authorization, sessionCookie}: {authorization: React.ReactNode, sessionCookie?: string}) {
     const [selectedAppUrl, setSelectedAppUrl] = useState(process.env.NEXT_PUBLIC_COLLEGE_BOWL_POOL_URL);
-    
-    const { user, isLoading } = useUser();
-
-    useEffect(() => {
-        if (isLoading) {
-            return;
-        }
-        window.addEventListener("message", (event) => {
-            if (event.origin !== process.env.NEXT_PUBLIC_COLLEGE_BOWL_POOL_URL) {
-                return;
-            }
-            if (event.data !== "requestUser") {
-                return;
-            }
-            event.source?.postMessage(user, { targetOrigin: event.origin });
-        });
-    }, [isLoading]);
 
     return (
         <>
@@ -34,7 +16,7 @@ export default function Wrapper({authorization}: {authorization: React.ReactNode
             </div>
             {authorization}
         </div>
-        {!isLoading && <iframe className="body" src={selectedAppUrl}></iframe>}
+        <iframe className="body" src={`${selectedAppUrl}${sessionCookie ? `?sessionCookie=${sessionCookie}` : ''}`}></iframe>
         </>
     );
 } 
