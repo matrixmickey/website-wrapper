@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function Wrapper({authorization}: {authorization: React.ReactNode}) {
+export default function Wrapper({authorization, sessionCookie}: {authorization: React.ReactNode, sessionCookie?: string}) {
     const [selectedAppUrl, setSelectedAppUrl] = useState(process.env.NEXT_PUBLIC_COLLEGE_BOWL_POOL_URL);
 
     return (
@@ -16,7 +16,7 @@ export default function Wrapper({authorization}: {authorization: React.ReactNode
             </div>
             {authorization}
         </div>
-        <iframe className="body" src={selectedAppUrl}></iframe>
+        <iframe className="body" src={`${selectedAppUrl}${sessionCookie ? `?sessionCookie=${sessionCookie}` : ''}`}></iframe>
         </>
     );
 } 
