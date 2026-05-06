@@ -10,6 +10,7 @@ export default function Wrapper({authorization}: {authorization: React.ReactNode
         <div className="header">
             <div className="body">
             <select value={selectedAppUrl} onChange={(e) => setSelectedAppUrl(e.target.value)}>
+                <option value={process.env.NEXT_PUBLIC_A_GAME_OF_A_GAME_OF_THRONES_URL}>A Game Of A Game Of Thrones</option>
                 <option value={process.env.NEXT_PUBLIC_COLLEGE_BOWL_POOL_URL}>College Bowl Pool</option>
             </select>
             </div>
