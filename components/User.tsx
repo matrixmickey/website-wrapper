@@ -10,11 +10,13 @@ export default function User({profilePicture, logoutButton}: {profilePicture: Re
     }
 
     return (
-        <>
-        <div onClick={toggleUserInfo}>
-            {profilePicture}
+        <div className="user">
+            <div onClick={toggleUserInfo}>
+                {profilePicture}
+            </div>
+            <div className="user-info">
+                {showUserInfo ? logoutButton : ""}
+            </div>
         </div>
-        {showUserInfo ? logoutButton : ""}
-        </>
     )
 }
