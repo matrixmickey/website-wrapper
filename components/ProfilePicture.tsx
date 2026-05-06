@@ -1,7 +1,7 @@
 import { auth0 } from "@/lib/auth0";
 import Image from 'next/image'
 
-export default async function Profile() {
+export default async function ProfilePicture() {
     const session = await auth0.getSession();
     const user = session?.user;
 

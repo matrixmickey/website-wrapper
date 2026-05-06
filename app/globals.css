@@ -30,10 +30,6 @@ div {
   justify-content: space-around;
 }
 
-.auth {
-  align-items: center;
-}
-
 .body {
   flex: 1;
   border: none;
