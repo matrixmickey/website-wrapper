@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function Wrapper({authorization}: {authorization: React.ReactNode}) {
-    const [selectedAppUrl, setSelectedAppUrl] = useState(process.env.NEXT_PUBLIC_COLLEGE_BOWL_POOL_URL);
+    const [selectedAppUrl, setSelectedAppUrl] = useState(process.env.NEXT_PUBLIC_A_GAME_OF_A_GAME_OF_THRONES_URL);
 
     return (
         <>
